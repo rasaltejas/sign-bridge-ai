@@ -80,3 +80,7 @@ PowerShell:
 Repeat data collection for each supported posture, performing the posture
 consistently while collecting. The app only recognizes classes present in the
 collected training data.
+
+
+<img width="935" height="1600" alt="postures" src="https://github.com/user-attachments/assets/d338eef2-8b34-4d1f-9e62-92a69b0a7c12" />
+
