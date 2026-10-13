@@ -47,6 +47,8 @@ does not request a GPU and can be deployed to Streamlit Community Cloud instead.
 4. In **Advanced settings**, select Python **3.11**, then deploy.
 
 Community Cloud installs the dependencies from the root `requirements.txt`.
+The root `packages.txt` supplies the Linux graphics libraries required by
+MediaPipe/OpenCV.
 After it finishes building, open the app URL and allow browser camera access.
 The app uses `st.camera_input()` and runs inference on CPU, so no ZeroGPU quota
 or Hugging Face GPU queue is involved.
