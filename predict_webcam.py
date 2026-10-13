@@ -87,7 +87,11 @@ def main():
             if hand_present:
                 for hl in results.multi_hand_landmarks:
                     mp.solutions.drawing_utils.draw_landmarks(
-                        frame, hl, mp_hands.HAND_CONNECTIONS
+                        frame,
+                        hl,
+                        mp_hands.HAND_CONNECTIONS,
+                        mp.solutions.drawing_styles.get_default_hand_landmarks_style(),
+                        mp.solutions.drawing_styles.get_default_hand_connections_style(),
                     )
 
                 vec = normalize_landmarks(results.multi_hand_landmarks[0])

@@ -108,8 +108,10 @@ def main():
         )
 
     clf = RandomForestClassifier(
-        n_estimators=200,
+        n_estimators=400,
         max_depth=None,
+        min_samples_leaf=1,
+        class_weight="balanced_subsample",
         random_state=RANDOM_SEED,
         n_jobs=-1,
     )

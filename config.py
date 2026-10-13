@@ -70,7 +70,7 @@ CLASS_IDS = list(CHARACTER_MAP.keys())
 # ---------------------------------------------------------------------------
 # Runtime thresholds
 # ---------------------------------------------------------------------------
-CONFIDENCE_THRESHOLD = 0.60      # below this -> "Unknown"
+CONFIDENCE_THRESHOLD = 0.70      # below this -> "Unknown"; keep conservative to avoid over-claiming uncertain matches
 SMOOTHING_WINDOW = 5             # majority vote over last N predictions
 MIN_DETECTION_CONFIDENCE = 0.5
 MIN_TRACKING_CONFIDENCE = 0.5

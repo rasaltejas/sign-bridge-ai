@@ -125,7 +125,11 @@ def collect(class_id, target_samples):
             if hand_present:
                 for hand_landmarks in results.multi_hand_landmarks:
                     mp.solutions.drawing_utils.draw_landmarks(
-                        frame, hand_landmarks, mp_hands.HAND_CONNECTIONS
+                        frame,
+                        hand_landmarks,
+                        mp_hands.HAND_CONNECTIONS,
+                        mp.solutions.drawing_styles.get_default_hand_landmarks_style(),
+                        mp.solutions.drawing_styles.get_default_hand_connections_style(),
                     )
 
             # Auto-capture when a hand is present (throttled)

@@ -66,7 +66,9 @@ then click **Train / retrain model**. With fewer than 5 samples per class, the
 model is trained on all samples and no holdout accuracy is reported. The current
 bundled model has only 2–3 samples per class, so predictions are provisional
 and may be incorrect; collect more varied real samples and retrain before
-presenting recognition accuracy as validated.
+presenting recognition accuracy as validated. The app also uses a more
+conservative confidence threshold so uncertain matches are labeled as low
+confidence instead of being presented as strong answers.
 
 Alternatively, collect samples using the local webcam scripts and train from
 PowerShell:

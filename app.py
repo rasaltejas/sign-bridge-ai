@@ -124,8 +124,9 @@ with st.expander("How to use", expanded=True):
         """
         1. Allow camera access when your browser asks.
         2. Click **Take Photo** and hold one of the trained hand postures.
-        3. The highest-scoring Marathi character and its score appear below.
-        4. Low scores are shown with a warning; the app still displays the best match.
+        3. Keep the full hand inside frame; the 21 landmark points and connections are drawn to help you position the hand correctly.
+        4. The highest-scoring Marathi character and its score appear below.
+        5. Low scores are shown with a warning; the app still displays the best match.
         """
     )
 
@@ -210,6 +211,12 @@ with st.expander(
                 if not sample_results.multi_hand_landmarks:
                     st.warning("No hand detected. Retake the photo with your hand clearly visible.")
                 else:
+                    for hand_landmarks in sample_results.multi_hand_landmarks:
+                        mp.solutions.drawing_utils.draw_landmarks(
+                            frame,
+                            hand_landmarks,
+                            mp.solutions.hands.HAND_CONNECTIONS,
+                        )
                     features = normalize_landmarks(sample_results.multi_hand_landmarks[0])
                     if features is None:
                         st.warning("The detected hand landmarks were degenerate. Please retake the photo.")
@@ -269,10 +276,17 @@ if img_file is not None:
     frame = np.array(image)
 
     results = hands.process(frame)
+    if results.multi_hand_landmarks:
+        for hand_landmarks in results.multi_hand_landmarks:
+            mp.solutions.drawing_utils.draw_landmarks(
+                frame,
+                hand_landmarks,
+                mp.solutions.hands.HAND_CONNECTIONS,
+            )
 
     col1, col2 = st.columns(2)
     with col1:
-        st.image(frame, caption="Captured frame", use_column_width=True)
+        st.image(frame, caption="Captured frame with 21 hand landmarks", use_column_width=True)
 
     if results.multi_hand_landmarks:
         vec = normalize_landmarks(results.multi_hand_landmarks[0])
