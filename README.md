@@ -31,8 +31,11 @@ guide. Its labels are for reference; the project uses the custom mapping in
 `config.py`, which may not match the chart.
 
 The Hugging Face Space uses `hf_app.py` as its Gradio entry point. Inference
-uses CPU-based MediaPipe and scikit-learn; it does not request ZeroGPU for
-predictions. Run `streamlit run app.py` for the local Streamlit interface.
+uses CPU-based MediaPipe and scikit-learn, but this Space uses ZeroGPU hardware
+and requires a `@spaces.GPU` function for startup. Hugging Face may queue each
+prediction for GPU allocation even though this model does not use the GPU, so
+the Space can be less predictable for a live presentation. Run
+`streamlit run app.py` for the local Streamlit interface without that queue.
 
 ## Train with real posture samples
 

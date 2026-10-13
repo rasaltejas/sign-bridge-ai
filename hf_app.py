@@ -7,6 +7,7 @@ import gradio as gr
 import joblib
 import mediapipe as mp
 import numpy as np
+import spaces
 from PIL import Image
 
 from config import (
@@ -51,6 +52,7 @@ def load_resources():
     return classifier, label_encoder, hands
 
 
+@spaces.GPU(duration=15)
 def predict(image):
     if image is None:
         return "Take a photo of a hand posture first.", None
