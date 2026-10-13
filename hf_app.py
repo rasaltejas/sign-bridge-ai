@@ -90,18 +90,17 @@ def predict(image):
     return message, rows
 
 
-reference_image = os.path.join(PROJECT_ROOT, "assets", "posture-reference.png")
 with gr.Blocks(title="SignBridge AI") as demo:
     gr.Markdown(
         "# 🤟 SignBridge AI — Marathi Hand Gesture Recognition\n"
         "Static hand posture to Marathi character using this project's custom "
         "mapping; it is not an official sign-language standard."
     )
-    with gr.Accordion("Gesture reference chart", open=False):
-        gr.Image(
-            value=reference_image,
-            label="Reference hand postures",
-            interactive=False,
+    with gr.Accordion("Gesture reference chart", open=True):
+        gr.Markdown(
+            "![Reference hand postures]"
+            "(https://huggingface.co/spaces/sajeteht/Sign-Bridge-AI/"
+            "resolve/main/postures.jpeg)"
         )
         gr.Markdown(
             "Visual guide only. The chart labels may not match SignBridge's "

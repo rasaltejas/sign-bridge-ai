@@ -107,9 +107,9 @@ st.warning(
     "created for this project. It is not an official ASL or Indian Sign Language standard."
 )
 
-with st.expander("Gesture reference chart", expanded=False):
+with st.expander("Gesture reference chart", expanded=True):
     st.image(
-        os.path.join(PROJECT_ROOT, "assets", "posture-reference.png"),
+        os.path.join(PROJECT_ROOT, "postures.jpeg"),
         caption="Reference image supplied for learning the hand shapes.",
         use_column_width=True,
     )

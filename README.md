@@ -26,7 +26,7 @@ ASL or Indian Sign Language standard.
 
 ## Project layout
 
-The Streamlit UI includes `assets/posture-reference.png` as a visual gesture
+Both app UIs show `postures.jpeg` from the project root as a visual gesture
 guide. Its labels are for reference; the project uses the custom mapping in
 `config.py`, which may not match the chart.
 
