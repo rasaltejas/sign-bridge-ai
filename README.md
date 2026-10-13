@@ -34,8 +34,24 @@ The Hugging Face Space uses `hf_app.py` as its Gradio entry point. Inference
 uses CPU-based MediaPipe and scikit-learn, but this Space uses ZeroGPU hardware
 and requires a `@spaces.GPU` function for startup. Hugging Face may queue each
 prediction for GPU allocation even though this model does not use the GPU, so
-the Space can be less predictable for a live presentation. Run
-`streamlit run app.py` for the local Streamlit interface without that queue.
+the Space can be less predictable for a live presentation. The Streamlit app
+does not request a GPU and can be deployed to Streamlit Community Cloud instead.
+
+## Deploy on Streamlit Community Cloud
+
+1. Sign in at <https://share.streamlit.io/> using the GitHub account that can
+   access `rasaltejas/sign-bridge-ai`.
+2. Choose **Create app** → **Yup, I have an app**.
+3. Select repository `rasaltejas/sign-bridge-ai`, branch `main`, and file path
+   `app.py`.
+4. In **Advanced settings**, select Python **3.11**, then deploy.
+
+Community Cloud installs the dependencies from the root `requirements.txt`.
+After it finishes building, open the app URL and allow browser camera access.
+The app uses `st.camera_input()` and runs inference on CPU, so no ZeroGPU quota
+or Hugging Face GPU queue is involved.
+
+For local development, run `streamlit run app.py` from the project root.
 
 ## Train with real posture samples
 
