@@ -70,6 +70,25 @@ presenting recognition accuracy as validated. The app also uses a more
 conservative confidence threshold so uncertain matches are labeled as low
 confidence instead of being presented as strong answers.
 
+After taking a photo in the collection section, click **Save this training
+sample** to append it to `data/landmarks.csv`. The app displays the CSV path and
+confirms the updated per-class count after each successful save. This file is
+on the machine running Streamlit: with a local app it is your computer; with a
+cloud deployment it is the cloud server, not your local project folder.
+
+To transfer samples between the cloud app and your computer:
+
+1. In the app that has the samples, open **Collect more posture samples and
+   train** and click **Download all training samples (CSV)**.
+2. Open the other app, choose that CSV under **Choose a SignBridge training
+   CSV to import**, then click **Import training samples**.
+3. Import adds new samples, preserves existing ones, skips exact duplicate
+   rows, and shows the updated class counts. Click **Train / retrain model**
+   afterward to train using the merged dataset.
+
+Keep the downloaded CSV private; it contains collected hand-landmark training
+data. The transfer does not publish the CSV to GitHub.
+
 Alternatively, collect samples using the local webcam scripts and train from
 PowerShell:
 
@@ -85,4 +104,3 @@ collected training data.
 
 
 <img width="935" height="1600" alt="postures" src="https://github.com/user-attachments/assets/d338eef2-8b34-4d1f-9e62-92a69b0a7c12" />
-

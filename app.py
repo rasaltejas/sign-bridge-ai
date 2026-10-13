@@ -30,6 +30,7 @@ from config import (
     MIN_TRACKING_CONFIDENCE,
     MAX_NUM_HANDS,
 )
+from training_data import export_training_csv, merge_training_csv, read_training_csv
 
 # MediaPipe imports are slow; cache the model loaders
 def model_artifact_version():
@@ -78,9 +79,7 @@ def get_training_sample_counts():
     if not os.path.exists(RAW_DATA_PATH):
         return {}
 
-    samples = pd.read_csv(RAW_DATA_PATH)
-    if "label" not in samples.columns:
-        raise ValueError(f"Training data is missing the label column: {RAW_DATA_PATH}")
+    samples = read_training_csv(RAW_DATA_PATH)
     return samples["label"].value_counts().to_dict()
 
 
@@ -141,6 +140,26 @@ except (OSError, pd.errors.ParserError, ValueError) as error:
     st.error(f"Could not read training data: {error}")
     st.stop()
 
+saved_class_id = st.session_state.pop("last_saved_training_class", None)
+if saved_class_id is not None:
+    st.success(
+        f"Saved one sample for {saved_class_id}. "
+        f"The CSV now contains {sample_counts.get(saved_class_id, 0)} "
+        f"{saved_class_id} samples."
+    )
+import_result = st.session_state.pop("last_imported_training_samples", None)
+if import_result is not None:
+    added, imported_counts = import_result
+    st.success(
+        f"Imported {added} new training samples; exact duplicates were skipped. "
+        f"Current totals: "
+        + ", ".join(
+            f"{class_id}: {sample_counts.get(class_id, 0)}"
+            for class_id in sorted(imported_counts)
+        )
+    )
+st.caption(f"Training sample CSV: `{RAW_DATA_PATH}`")
+
 if model_missing:
     st.warning(
         "No trained model is available yet. Collect samples for at least two "
@@ -190,6 +209,48 @@ with st.expander(
         else:
             st.info("No real training samples collected yet.")
 
+        st.markdown("#### Transfer training samples between cloud and computer")
+        st.markdown(
+            "Download the full training CSV from the app where you collected "
+            "samples, then upload that file in the app where you want to add "
+            "them. Import keeps existing samples and skips exact duplicates."
+        )
+        st.download_button(
+            "Download all training samples (CSV)",
+            data=export_training_csv(RAW_DATA_PATH),
+            file_name="signbridge_training_samples.csv",
+            mime="text/csv",
+            key="download_training_samples",
+        )
+        imported_file = st.file_uploader(
+            "Choose a SignBridge training CSV to import",
+            type=["csv"],
+            key="upload_training_samples",
+        )
+        if imported_file is not None and st.button(
+            "Import training samples",
+            key="import_training_samples",
+        ):
+            try:
+                added, imported_counts = merge_training_csv(
+                    imported_file.getvalue(),
+                    RAW_DATA_PATH,
+                )
+            except (
+                OSError,
+                pd.errors.EmptyDataError,
+                pd.errors.ParserError,
+                UnicodeDecodeError,
+                ValueError,
+            ) as error:
+                st.error(f"Could not import training samples: {error}")
+            else:
+                st.session_state["last_imported_training_samples"] = (
+                    added,
+                    imported_counts,
+                )
+                st.rerun()
+
         class_id = st.selectbox(
             "Posture class",
             list(CHARACTER_MAP),
@@ -223,10 +284,7 @@ with st.expander(
                     else:
                         save_training_sample(features, class_id)
                         saved_samples.add((class_id, sample_hash))
-                        st.success(
-                            f"Saved sample for {class_id} ({CHARACTER_MAP[class_id]}). "
-                            "Take a different photo for the next sample."
-                        )
+                        st.session_state["last_saved_training_class"] = class_id
                         st.rerun()
 
         collected_classes = [
