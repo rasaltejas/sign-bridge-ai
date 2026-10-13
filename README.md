@@ -12,7 +12,7 @@ pinned: false
 
 # SignBridge AI — Marathi Hand Gesture Recognition (Version 1)
 
-Real-time recognition of 26 static hand postures, each mapped to a Marathi
+Image-based recognition of 26 static hand postures, each mapped to a Marathi
 character (Devanagari). The posture set is *inspired by* ASL hand positions,
 but the posture-to-character mapping is **custom** and **not** an official
 ASL or Indian Sign Language standard.
@@ -21,7 +21,7 @@ ASL or Indian Sign Language standard.
 - Python 3.10 / 3.11
 - OpenCV, MediaPipe (21 hand landmarks)
 - NumPy, scikit-learn (RandomForest)
-- Streamlit (UI + Hugging Face deployment)
+- Streamlit (local UI) and Gradio (Hugging Face Space UI)
 - Joblib (model persistence)
 
 ## Project layout
@@ -30,9 +30,9 @@ The Streamlit UI includes `assets/posture-reference.png` as a visual gesture
 guide. Its labels are for reference; the project uses the custom mapping in
 `config.py`, which may not match the chart.
 
-The Hugging Face Space uses `hf_app.py` as its Gradio entry point. Run
-`streamlit run app.py` for the local Streamlit interface.
-The deployed app requests ZeroGPU only while running a prediction.
+The Hugging Face Space uses `hf_app.py` as its Gradio entry point. Inference
+uses CPU-based MediaPipe and scikit-learn; it does not request ZeroGPU for
+predictions. Run `streamlit run app.py` for the local Streamlit interface.
 
 ## Train with real posture samples
 
@@ -42,8 +42,10 @@ train** in the Streamlit app. Choose a class, capture a hand photo, and save it.
 Repeat with different photos for at least two classes (at least 2 samples per
 class to enable training; 30 or more varied samples per class are recommended),
 then click **Train / retrain model**. With fewer than 5 samples per class, the
-model is trained on all samples and no holdout accuracy is reported; predictions
-from such a sparse model are provisional and may be incorrect.
+model is trained on all samples and no holdout accuracy is reported. The current
+bundled model has only 2–3 samples per class, so predictions are provisional
+and may be incorrect; collect more varied real samples and retrain before
+presenting recognition accuracy as validated.
 
 Alternatively, collect samples using the local webcam scripts and train from
 PowerShell:
