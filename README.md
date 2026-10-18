@@ -3,10 +3,8 @@ title: SignBridge AI
 emoji: 🤟
 colorFrom: blue
 colorTo: green
-sdk: gradio
 sdk_version: 6.30.0
 python_version: "3.12"
-app_file: hf_app.py
 pinned: false
 ---
 
