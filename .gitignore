@@ -4,3 +4,4 @@ __pycache__/
 *.py[cod]
 .vscode/
 data/landmarks.csv
+docs/prediction-accuracy-report.pdf
