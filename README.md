@@ -101,4 +101,36 @@ consistently while collecting. The app only recognizes classes present in the
 collected training data.
 
 
-<img width="935" height="1600" alt="postures" src="https://github.com/user-attachments/assets/d338eef2-8b34-4d1f-9e62-92a69b0a7c12" />
+<!-- <img width="935" height="1600" alt="postures" src="https://github.com/user-attachments/assets/d338eef2-8b34-4d1f-9e62-92a69b0a7c12" /> -->
+
+
+
+<h3 id="photo-1" align="center">Photo 1</h3>
+<p align="center">
+  <img
+    src="https://github.com/user-attachments/assets/d338eef2-8b34-4d1f-9e62-92a69b0a7c12"
+    width="600"
+    alt="Photo 1"
+  />
+</p>
+<h3 id="photo-1" align="center">Photo 2</h3>
+<p align="center">
+  <img
+    src="character 1st.png"
+    width="600"
+    alt="Photo 2"
+  />
+</p>
+<h3 id="photo-1" align="center">Photo 3</h3>
+<p align="center">
+   <img
+    src="character 2nd.png"
+    width="600"
+    alt="Photo 3"
+  />
+</p>
+<p align="center">
+  <a href="#photo-4">← Previous</a>
+  &nbsp; | &nbsp;
+  <a href="#photo-2">Next →</a>
+</p>
