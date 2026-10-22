@@ -106,14 +106,16 @@ collected training data.
 
 
 <h3 id="photo-1" align="center">Photo 1</h3>
+<p align="center">━━━━━━━━━━</p>
 <p align="center">
   <img
     src="https://github.com/user-attachments/assets/d338eef2-8b34-4d1f-9e62-92a69b0a7c12"
-    width="600"
+    width="600", height="600"
     alt="Photo 1"
   />
 </p>
 <h3 id="photo-1" align="center">Photo 2</h3>
+<p align="center">━━━━━━━━━━</p>
 <p align="center">
   <img
     src="character 1st.png"
@@ -122,6 +124,7 @@ collected training data.
   />
 </p>
 <h3 id="photo-1" align="center">Photo 3</h3>
+<p align="center">━━━━━━━━━━</p>
 <p align="center">
    <img
     src="character 2nd.png"
@@ -129,8 +132,4 @@ collected training data.
     alt="Photo 3"
   />
 </p>
-<p align="center">
-  <a href="#photo-4">← Previous</a>
-  &nbsp; | &nbsp;
-  <a href="#photo-2">Next →</a>
-</p>
+
