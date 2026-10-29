@@ -22,6 +22,8 @@ ASL or Indian Sign Language standard.
 - Streamlit (local UI) and Gradio (Hugging Face Space UI)
 - Joblib (model persistence)
 
+<img width="558" height="649" alt="image" src="https://github.com/user-attachments/assets/c633aa46-3e1f-4950-b70a-4de0f340e1d9" />
+
 ## Project layout
 
 Both app UIs show `postures.jpeg` from the project root as a visual gesture
